@@ -51,7 +51,7 @@ from jsonnet_docblock_parser import parseFile, Generator
 TEST_FILE = "some.jsonnet"
 
 # Parse the file.
-docblocks = parseFile(TEST_FILE)
+results = parseFile(TEST_FILE)
 
 # Load the generator.
 generator = Generator()

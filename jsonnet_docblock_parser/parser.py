@@ -94,13 +94,15 @@ def parseDocblock(lines, start_line, end_line, file) -> Docblock:
   return docblock
 
 def _extract_long_description(lines, start_line, abs_current_line):
-  current_line = start_line + 1
+  if abs_current_line < 2:
+    return ""
+  current_line = start_line + 2
   result = ""
-  while current_line < abs_current_line:
-    result = result + re.sub(PATTERNS["docblock"], "\n", lines[current_line])
+  while current_line < (start_line + abs_current_line):
+    result = result + "\n" + re.sub(PATTERNS["docblock"], "", lines[current_line]).lstrip()
     current_line = current_line + 1
 
-  return result.lstrip()
+  return result
 
 def _build_param_single_line(line):
   pattern = re.compile(PATTERNS["parse_single_line_argument"])
